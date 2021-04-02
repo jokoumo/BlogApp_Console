@@ -8,6 +8,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Article {
+    private final int id;
+    private static int idCount = 0;
     private String category;
     private String title;
     private String body;
@@ -17,7 +19,7 @@ public class Article {
     private ArrayList<String> commentary;
 
     Article () {
-
+        this.id = idCount++;
     }
 
     public String getCategory() {
