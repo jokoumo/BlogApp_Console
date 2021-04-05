@@ -3,6 +3,9 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -35,19 +38,47 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        LinkedList<Article> listArticle = new LinkedList<>();
-        listArticle.add(new Article("Max", "Sonstiges", "Leute Heute", "jsajg kfj kfivkh ivihv\nkdabfk akdbgk akbka\nkdbkdja lafbkeab.", false));
-        listArticle.add(new Article("Bert", "Lifestyle", "Eine Schrift", "nadgljbae osapü\nasbka adgkbx üsdo\ncvmdsk apois epej.", true));
-        listArticle.add(new Article("Heidi", "Sport", "Nochmal", "dkgbaek xpaoj qpo\nsokasa dkdva ldiaefa\nyxlmq dyvpaekn aeofn.", false));
-
-        System.out.println(listArticle);
-
-        listArticle.add(Article.newArticle());
-
-        exportList(listArticle);
-
+        Scanner scanner = new Scanner(System.in);
         LinkedList<Article> newList = importList();
+        Stream<Article> searchList = newList.stream().filter(a -> Objects.equals(a.getArticleID(), scanner.nextInt()));
 
-        System.out.println("\nImportierte Liste:\n" + newList);
+        System.out.println("~~Deine BlogApp~~\nWas möchtest du tun?");
+        System.out.println("1: Blogeinträge anzeigen\n" +
+                "2: Neuer Blogeintrag\n" +
+                "3: Eintrag löschen\n" +
+                "4: Kategorien bearbeiten");
+
+        switch(scanner.nextInt()) {
+            case 1:
+                System.out.println("\nImportierte Liste:\n" + newList);
+                break;
+            case 2:
+                newList.add(Article.newArticle());
+                break;
+            case 3:
+                System.out.println("Welcher Blogeintrag soll gelöscht werden? ID eingeben:");
+                break;
+            case 4:
+                System.out.println("Kategorie löschen oder hinzufügen");
+                break;
+            default:
+        }
+
+
+
+//        LinkedList<Article> listArticle = new LinkedList<>();
+//        listArticle.add(new Article("Max", "Sonstiges", "Leute Heute", "jsajg kfj kfivkh ivihv\nkdabfk akdbgk akbka\nkdbkdja lafbkeab.", false));
+//        listArticle.add(new Article("Bert", "Lifestyle", "Eine Schrift", "nadgljbae osapü\nasbka adgkbx üsdo\ncvmdsk apois epej.", true));
+//        listArticle.add(new Article("Heidi", "Sport", "Nochmal", "dkgbaek xpaoj qpo\nsokasa dkdva ldiaefa\nyxlmq dyvpaekn aeofn.", false));
+//
+//        System.out.println(listArticle);
+//
+//        listArticle.add(Article.newArticle());
+//
+//        exportList(listArticle);
+
+
+
+
     }
 }
