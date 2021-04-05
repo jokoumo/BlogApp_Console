@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="11.0.3" class="java.beans.XMLDecoder">
+ <object class="Article">
+  <void property="articleID">
+   <int>1617625199</int>
+  </void>
+  <void property="author">
+   <string>Max</string>
+  </void>
+  <void property="date">
+   <string>2021-04-05 14:19:59</string>
+  </void>
+  <void property="text">
+   <string>sajg kfj kfivkh ivihv
+kdabfk akdbgk akbka
+kdbkdja lafbkeab.</string>
+  </void>
+  <void property="title">
+   <string>Schrift</string>
+  </void>
+ </object>
+</java>

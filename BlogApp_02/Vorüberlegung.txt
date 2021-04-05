@@ -1,0 +1,15 @@
+Blog in Konsole darstellen und bearbeiten
+
+Artikel (class)
+	Felder:	ID (final int)
+		Autor (String)
+		Datum+Zeit (String)
+		Titel (String)
+		Text (String)
+		Veröffentlicht (boolean)
+
+	Methoden: Konstruktoren
+		  Getter + Setter
+		  print
+
+LinkedList<Artikel>
