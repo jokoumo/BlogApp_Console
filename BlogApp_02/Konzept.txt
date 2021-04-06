@@ -1,0 +1,29 @@
+Blog in Konsole darstellen und bearbeiten
+
+Artikel (class)
+	Felder:	ID (final int)
+		Autor (String)
+		Datum+Zeit (String)
+		Kategorie (String)
+		Titel (String)
+		Text (String)
+		Veröffentlicht (boolean)
+
+	Methoden: Konstruktoren
+		  Getter + Setter
+		  print
+
+LinkedList<Artikel>
+Kategorien(String)
+
+switch(input)
+	1: Blogeinträge anzeigen
+	2: Neuer Blogeintrag
+		- Autor eintragen
+		- Kategorie wählen/hinzufügen
+	3: Eintrag löschen 	
+	4: Kategorien bearbeiten
+		- hinzufügen
+		- entfernen
+
+Export wird immer komplett neu geschrieben
