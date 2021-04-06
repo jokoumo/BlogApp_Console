@@ -1,40 +1,43 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-//    private static void exportList(LinkedList<Article> list) {
-//        try {
-//            XMLEncoder encoder = new XMLEncoder(new FileOutputStream("articles.xml"));
-//            encoder.writeObject(list);
-//            encoder.close();
-//        } catch (IOException e) {
-//            System.out.println("Fehler beim Export: " + e.getMessage());
-//        }
-//    }
-//
-//    private static LinkedList<Article> importList() {
-//        LinkedList<Article> list = null;
-//        try {
-//            XMLDecoder dec = new XMLDecoder(new BufferedInputStream(new FileInputStream("articles.xml")));
-//            list = (LinkedList<Article>) dec.readObject();
-//            dec.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Fehler: " + e.getMessage());
-//        } catch (ClassCastException e) {
-//            System.out.println("Fehler: " + e.getMessage());
-//        }
-//        return list;
-//    }
-
     public static void main(String[] args) throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
-        LinkedList<Article> newList = myXML.importList();
-        boolean menu = true;
+        List<Article> blogList = new LinkedList<Article>();
+        List<String> categoryList = new ArrayList<>();
 
-        System.out.println("~~Deine BlogApp~~\nWas möchtest du tun?");
+        System.out.println("~~Deine BlogApp~~\n");
+
+        try {
+            blogList = myXML.importList("articles.xml");
+        } catch (FileNotFoundException e) {                         //Datei für Blogeinträge anlegen
+            myXML.exportList("articles.xml", blogList);
+        }
+
+        try {
+            categoryList = myXML.importList("categories.xml");
+        } catch (FileNotFoundException e) {                         //Datei für Kategorien anlegen
+            categoryList.add("Familie");
+            categoryList.add("Klatsch");
+            categoryList.add("Politik");
+            categoryList.add("Reisen");
+            categoryList.add("Sport");
+            categoryList.add("Wirtschaft");
+            categoryList.add("Wissenschaft");
+            categoryList.add("Sonstiges");
+            myXML.exportList("categories.xml", categoryList);
+            System.out.println("INFO:\nListe mit Kategorien neu angelegt. Standard-Einträge hinzugefügt.\n");
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Was möchtest du tun?");
 
         while (true) {
             System.out.println(
@@ -46,17 +49,17 @@ public class Main {
 
             switch (scanner.nextLine()) {
                 case "1":
-                    for (int i = 1; i <= newList.size(); i++) {
-                        System.out.println("Nr.: " + i + "\n" + newList.get(i-1));
+                    for (int i = 1; i <= blogList.size(); i++) {
+                        System.out.println("Nr.: " + i + "\n" + blogList.get(i-1));
                     }
                     break;
                 case "2":
-                    newList.add(Article.newArticle());
+                    blogList.add(Article.newArticle(categoryList));
                     break;
                 case "3":
                     try {
                         System.out.println("Welcher Blogeintrag soll gelöscht werden? Nr. eingeben:");
-                        newList.remove(scanner.nextInt() - 1);
+                        blogList.remove(scanner.nextInt() - 1);
                         scanner.nextLine();
                     } catch (Exception e) {
                         System.out.println("Ein Artikel mit dieser Nummer existiert nicht.");
@@ -69,7 +72,5 @@ public class Main {
                     return;
             }
         }
-
-
     }
 }

@@ -2,12 +2,11 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Article {
-    private static ArrayList<String> categoryList = new ArrayList<>();
     private String author;
     private String date;
     private String category;
@@ -15,17 +14,7 @@ public class Article {
     private String content;
     private boolean published;
 
-    public Article() {
-        if (Article.categoryList.isEmpty()) {
-            Article.categoryList.add("Familie");
-            Article.categoryList.add("Sport");
-            Article.categoryList.add("Finanzen");
-            Article.categoryList.add("Reisen");
-            Article.categoryList.add("Wohnen");
-            Article.categoryList.add("Tiere");
-            Article.categoryList.add("Sonstiges");
-        }
-    }
+    public Article() {}
 
     public Article(String author, String category, String title, String content, boolean published) {
         this.author = author;
@@ -64,18 +53,6 @@ public class Article {
         this.published = published;
     }
 
-    public static ArrayList<String> getCategoryList() {
-        return categoryList;
-    }
-
-    public static void setCategoryList(ArrayList<String> categoryList) {
-        Article.categoryList = categoryList;
-    }
-
-    public static void addCategoryList(String category) {
-        Article.categoryList.add(category);
-    }
-
     public String getAuthor() {
         return author;
     }
@@ -101,11 +78,11 @@ public class Article {
         return ("Titel: " + title + '\n' +
                 "von: " + author + " am " + date + "\n" +
                 "Kategorie: " + category + "\n\n" +
-                content + (published == false ? "\n\n[Nicht veröffentlicht]":"\n\n[Veröffentlicht]") +
+                content + (!published ? "\n\n[Nicht veröffentlicht]":"\n\n[Veröffentlicht]") +
                 "\n--------------------");
     }
 
-    public static Article newArticle() {
+    public static Article newArticle(List<String> categories) {
         Scanner scanner = new Scanner (System.in);
         Article article = new Article();
 
@@ -120,9 +97,9 @@ public class Article {
 
         while (true) {
             try {
-                for (int i = 1; i < Article.categoryList.size(); i++)
-                    System.out.println(i + ": " + Article.categoryList.get(i -1));
-                article.setCategory(Article.getCategoryList().get(scanner.nextInt() -1));
+                for (int i = 1; i < categories.size(); i++)
+                    System.out.println(i + ": " + categories.get(i -1));
+                article.setCategory(categories.get(scanner.nextInt() -1));
                 scanner.nextLine();
                 break;
             } catch (InputMismatchException e) {
@@ -135,7 +112,7 @@ public class Article {
         }
 
         System.out.println("Beitrag veröffentlichen? (j/n)");
-        if (scanner.nextLine().toLowerCase() == "j") {
+        if (scanner.nextLine().equalsIgnoreCase("j")) {
             article.setPublished(true);
             System.out.println("Dein Beitrag wurde veröffentlicht.");
         } else {

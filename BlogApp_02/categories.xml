@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="11.0.3" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <string>Familie</string>
+  </void>
+  <void method="add">
+   <string>Klatsch</string>
+  </void>
+  <void method="add">
+   <string>Politik</string>
+  </void>
+  <void method="add">
+   <string>Reisen</string>
+  </void>
+  <void method="add">
+   <string>Sport</string>
+  </void>
+  <void method="add">
+   <string>Wirtschaft</string>
+  </void>
+  <void method="add">
+   <string>Wissenschaft</string>
+  </void>
+  <void method="add">
+   <string>Sonstiges</string>
+  </void>
+ </object>
+</java>

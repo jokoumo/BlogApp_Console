@@ -1,13 +1,13 @@
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
-import java.util.LinkedList;
+import java.util.List;
 
 public class myXML {
 
-    public static <T> void exportList (LinkedList<T> list) {
+    public static <T> void exportList (String file, List<T> list) {
         try {
-            XMLEncoder encoder = new XMLEncoder(new FileOutputStream("articles.xml"));
+            XMLEncoder encoder = new XMLEncoder(new FileOutputStream(file));
             encoder.writeObject(list);
             encoder.close();
         } catch (IOException e) {
@@ -15,14 +15,12 @@ public class myXML {
         }
     }
 
-    public static <T> LinkedList<T> importList() {
-        LinkedList<T> list = null;
+    public static <T> List<T> importList(String file) throws FileNotFoundException {
+        List<T> list = null;
         try {
-            XMLDecoder dec = new XMLDecoder(new BufferedInputStream(new FileInputStream("articles.xml")));
-            list = (LinkedList<T>) dec.readObject();
+            XMLDecoder dec = new XMLDecoder(new BufferedInputStream(new FileInputStream(file)));
+            list = (List<T>) dec.readObject();
             dec.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Fehler: " + e.getMessage());
         } catch (ClassCastException e) {
             System.out.println("Fehler: " + e.getMessage());
         }
