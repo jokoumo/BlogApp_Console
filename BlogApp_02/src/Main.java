@@ -65,20 +65,5 @@ public class Main {
         }
 
 
-
-//        LinkedList<Article> listArticle = new LinkedList<>();
-//        listArticle.add(new Article("Max", "Sonstiges", "Leute Heute", "jsajg kfj kfivkh ivihv\nkdabfk akdbgk akbka\nkdbkdja lafbkeab.", false));
-//        listArticle.add(new Article("Bert", "Lifestyle", "Eine Schrift", "nadgljbae osapü\nasbka adgkbx üsdo\ncvmdsk apois epej.", true));
-//        listArticle.add(new Article("Heidi", "Sport", "Nochmal", "dkgbaek xpaoj qpo\nsokasa dkdva ldiaefa\nyxlmq dyvpaekn aeofn.", false));
-//
-//        System.out.println(listArticle);
-//
-//        listArticle.add(Article.newArticle());
-//
-//        exportList(listArticle);
-
-
-
-
     }
 }

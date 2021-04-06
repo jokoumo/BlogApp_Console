@@ -135,6 +135,7 @@ public class Article {
         article.setDate(Date.valueOf(LocalDate.now()).toString() + " " + Time.valueOf(LocalTime.now()).toString());
         article.setPublished(true);
 
+
         return article;
     }
 }
