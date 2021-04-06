@@ -3,9 +3,6 @@
  <object class="java.util.LinkedList">
   <void method="add">
    <object class="Article">
-    <void property="articleID">
-     <int>1617637472</int>
-    </void>
     <void property="author">
      <string>Max</string>
     </void>
@@ -27,9 +24,6 @@ kdbkdja lafbkeab.</string>
   </void>
   <void method="add">
    <object class="Article">
-    <void property="articleID">
-     <int>1617637473</int>
-    </void>
     <void property="author">
      <string>Bert</string>
     </void>
@@ -54,9 +48,6 @@ cvmdsk apois epej.</string>
   </void>
   <void method="add">
    <object class="Article">
-    <void property="articleID">
-     <int>1617637473</int>
-    </void>
     <void property="author">
      <string>Heidi</string>
     </void>
@@ -78,9 +69,6 @@ yxlmq dyvpaekn aeofn.</string>
   </void>
   <void method="add">
    <object class="Article">
-    <void property="articleID">
-     <int>1617637503</int>
-    </void>
     <void property="author">
      <string>Dante</string>
     </void>

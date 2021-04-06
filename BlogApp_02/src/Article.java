@@ -3,11 +3,11 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Article {
     private static ArrayList<String> categoryList = new ArrayList<>();
-    private int articleID = 0;
     private String author;
     private String date;
     private String category;
@@ -28,18 +28,12 @@ public class Article {
     }
 
     public Article(String author, String category, String title, String content, boolean published) {
-        this.articleID = (int) (System.currentTimeMillis()/1000);
         this.author = author;
         this.date = Date.valueOf(LocalDate.now()).toString() + " " + Time.valueOf(LocalTime.now()).toString();
         this.category = category;
         this.title = title;
         this.content = content;
         this.published = published;
-    }
-
-    public void setArticleID(Integer articleID) {
-        if (this.articleID == 0)
-            this.articleID = articleID;
     }
 
     public void setAuthor(String author) {
@@ -82,10 +76,6 @@ public class Article {
         Article.categoryList.add(category);
     }
 
-    public Integer getArticleID() {
-        return articleID;
-    }
-
     public String getAuthor() {
         return author;
     }
@@ -108,7 +98,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return ("\n[ID: " + articleID + "] " + title + '\n' +
+        return ("Titel: " + title + '\n' +
                 "von: " + author + " am " + date + "\n" +
                 "Kategorie: " + category + "\n\n" +
                 content + (published == false ? "\n\n[Nicht veröffentlicht]":"\n\n[Veröffentlicht]") +
@@ -119,22 +109,41 @@ public class Article {
         Scanner scanner = new Scanner (System.in);
         Article article = new Article();
 
-        System.out.print("-NEUER BLOGEINTRAG-\nWer ist der Autor? ");
+        System.out.print("-NEUER BLOGEINTRAG-\n");
+        System.out.print("Wer ist der Autor? ");
         article.setAuthor(scanner.nextLine());
         System.out.print("Wie lautet der Titel? ");
         article.setTitle(scanner.nextLine());
         System.out.print("Was ist der Inhalt? ");
         article.setContent(scanner.nextLine());
         System.out.println("Wähle eine Kategorie:");
-        for (int i = 1; i < Article.categoryList.size(); i++) {
-            System.out.println(i + ": " + Article.categoryList.get(i -1));
+
+        while (true) {
+            try {
+                for (int i = 1; i < Article.categoryList.size(); i++)
+                    System.out.println(i + ": " + Article.categoryList.get(i -1));
+                article.setCategory(Article.getCategoryList().get(scanner.nextInt() -1));
+                scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Bitte eine gültige Zahl eingeben.");
+                scanner.nextLine();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Bitte einen gültigen Wert eingeben.");
+                scanner.nextLine();
+            }
         }
-        article.setCategory(Article.getCategoryList().get(scanner.nextInt() -1));
 
-        article.setArticleID((int) (System.currentTimeMillis()/1000));
+        System.out.println("Beitrag veröffentlichen? (j/n)");
+        if (scanner.nextLine().toLowerCase() == "j") {
+            article.setPublished(true);
+            System.out.println("Dein Beitrag wurde veröffentlicht.");
+        } else {
+            article.setPublished(false);
+            System.out.println("Dein Beitrag wurde als Entwurf gespeichert.");
+        }
+
         article.setDate(Date.valueOf(LocalDate.now()).toString() + " " + Time.valueOf(LocalTime.now()).toString());
-        article.setPublished(true);
-
 
         return article;
     }
