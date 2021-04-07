@@ -97,10 +97,9 @@ public class Article {
 
         while (true) {
             try {
-                for (int i = 1; i < categories.size(); i++)
+                for (int i = 1; i <= categories.size(); i++)
                     System.out.println(i + ": " + categories.get(i -1));
                 article.setCategory(categories.get(scanner.nextInt() -1));
-                scanner.nextLine();
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Bitte eine gültige Zahl eingeben.");
@@ -108,20 +107,38 @@ public class Article {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Bitte einen gültigen Wert eingeben.");
                 scanner.nextLine();
+            } finally {
+                scanner.nextLine();
             }
         }
 
         System.out.println("Beitrag veröffentlichen? (j/n)");
         if (scanner.nextLine().equalsIgnoreCase("j")) {
             article.setPublished(true);
-            System.out.println("Dein Beitrag wurde veröffentlicht.");
+            System.out.println("Dein Beitrag wurde veröffentlicht.\n");
         } else {
             article.setPublished(false);
-            System.out.println("Dein Beitrag wurde als Entwurf gespeichert.");
+            System.out.println("Dein Beitrag wurde als Entwurf gespeichert.\n");
         }
 
         article.setDate(Date.valueOf(LocalDate.now()).toString() + " " + Time.valueOf(LocalTime.now()).toString());
 
         return article;
+    }
+
+    public static void searchArticle (List<Article> list) {
+        Scanner scanner = new Scanner(System.in);
+        String search = scanner.nextLine();
+        boolean foundArticle = false;
+        for(int i = 0; i < list.size(); i++) {
+            if (list.get(i).getTitle().toLowerCase().contains(search.toLowerCase())) {
+                if(!foundArticle)
+                    System.out.println("\nSuchergebnisse:\n");
+                System.out.println(list.get(i).toString());
+                foundArticle = true;
+            }
+        }
+        if(!foundArticle)
+            System.out.println("\nEs gab keinen Treffer für deine Suche.\n");
     }
 }
