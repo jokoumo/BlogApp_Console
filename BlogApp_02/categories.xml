@@ -17,6 +17,9 @@
    <string>Sport</string>
   </void>
   <void method="add">
+   <string>Technik</string>
+  </void>
+  <void method="add">
    <string>Wirtschaft</string>
   </void>
   <void method="add">

@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("~~Deine BlogApp~~\n");
+        System.out.println("~~Deine BlogApp~~");
 
         List<Article> articleList = new LinkedList<Article>();     //Speichert die Blogartikel
         List<String> categoryList = new ArrayList<String>();    //Speichert die möglichen Kategorien
@@ -32,6 +32,7 @@ public class Main {
             categoryList.add("Politik");
             categoryList.add("Reisen");
             categoryList.add("Sport");
+            categoryList.add("Technik");
             categoryList.add("Wirtschaft");
             categoryList.add("Wissenschaft");
             categoryList.add("Sonstiges");
@@ -43,7 +44,7 @@ public class Main {
 
         while (true) {
             System.out.println(
-                    "Was möchtest du tun? Gib eine Nummer ein:\n" +
+                    "\nWas möchtest du tun? Gib eine Nummer ein:\n" +
                     "1: Blogeinträge anzeigen\n" +
                     "2: Neuer Blogeintrag\n" +
                     "3: Blogeintrag suchen\n" +

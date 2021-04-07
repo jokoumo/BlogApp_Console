@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -18,38 +20,10 @@ public class Article {
 
     public Article(String author, String category, String title, String content, boolean published) {
         this.author = author;
-        this.date = Date.valueOf(LocalDate.now()).toString() + " " + Time.valueOf(LocalTime.now()).toString();
+        this.date = Date.valueOf(LocalDate.now()) + " " + Time.valueOf(LocalTime.now());
         this.category = category;
         this.title = title;
         this.content = content;
-        this.published = published;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setPublished(boolean published) {
         this.published = published;
     }
 
@@ -57,20 +31,48 @@ public class Article {
         return author;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getContent() {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public boolean isPublished() {
         return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
     }
 
     @Override
@@ -91,14 +93,37 @@ public class Article {
         article.setAuthor(scanner.nextLine());
         System.out.print("Wie lautet der Titel? ");
         article.setTitle(scanner.nextLine());
-        System.out.print("Was ist der Inhalt? ");
-        article.setContent(scanner.nextLine());
-        System.out.println("Wähle eine Kategorie:");
 
+        System.out.print("\nWillst du den Inhalt...\n" +
+                "1: selbst schreiben?\n" +
+                "2: aus einer Datei (*.txt) importieren?\n");
+        switch (scanner.nextLine()) {
+            case "1":
+                System.out.println("Leg los:");
+                article.setContent(scanner.nextLine());
+                break;
+            case "2":
+                String temp = "";
+                System.out.println("Gib den Dateipfad ein (z.B.: C\\User\\Documents\\Test.txt):");
+                try {
+                    Scanner readFile = new Scanner(new File(scanner.nextLine()));
+                    while (readFile.hasNextLine())
+                        temp += (readFile.nextLine()) + (readFile.hasNextLine() ? '\n':"");
+                    article.setContent(temp);
+                } catch (FileNotFoundException e) {
+                    System.out.println("Fehler: Keine gültige Datei gefunden.");
+                }
+                break;
+            default:
+                article.setContent("Hier könnte deine Werbung stehen.");
+        }
+
+        System.out.println("\nWähle eine Kategorie:");
         while (true) {
+            for (int i = 1; i <= categories.size(); i++)    // Kategorien auflisten
+                System.out.println(i + ": " + categories.get(i -1));
+
             try {
-                for (int i = 1; i <= categories.size(); i++)
-                    System.out.println(i + ": " + categories.get(i -1));
                 article.setCategory(categories.get(scanner.nextInt() -1));
                 break;
             } catch (InputMismatchException e) {
@@ -112,16 +137,16 @@ public class Article {
             }
         }
 
-        System.out.println("Beitrag veröffentlichen? (j/n)");
+        System.out.println("\nBeitrag veröffentlichen? (j/n)");
         if (scanner.nextLine().equalsIgnoreCase("j")) {
             article.setPublished(true);
-            System.out.println("Dein Beitrag wurde veröffentlicht.\n");
+            System.out.println("\nDein Beitrag wurde veröffentlicht.");
         } else {
             article.setPublished(false);
-            System.out.println("Dein Beitrag wurde als Entwurf gespeichert.\n");
+            System.out.println("\nDein Beitrag wurde als Entwurf gespeichert.");
         }
 
-        article.setDate(Date.valueOf(LocalDate.now()).toString() + " " + Time.valueOf(LocalTime.now()).toString());
+        article.setDate(Date.valueOf(LocalDate.now()) + " " + Time.valueOf(LocalTime.now()));
 
         return article;
     }
@@ -130,11 +155,11 @@ public class Article {
         Scanner scanner = new Scanner(System.in);
         String search = scanner.nextLine();
         boolean foundArticle = false;
-        for(int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTitle().toLowerCase().contains(search.toLowerCase())) {
-                if(!foundArticle)
+        for (Article article : list) {
+            if (article.getTitle().toLowerCase().contains(search.toLowerCase())) {
+                if (!foundArticle)
                     System.out.println("\nSuchergebnisse:\n");
-                System.out.println(list.get(i).toString());
+                System.out.println(article.toString());
                 foundArticle = true;
             }
         }
