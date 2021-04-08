@@ -5,15 +5,17 @@ import java.util.*;
 
 public class Main {
 
-    final static String FILE_NAME_ARTICLES = "articles.xml";
-    final static String FILE_NAME_CATEGORIES = "categories.xml";
-
     public static void main(String[] args) {
 
-        System.out.println("~~Deine BlogApp~~");
+        final String FILE_NAME_ARTICLES = "articles.xml";
+        final String FILE_NAME_CATEGORIES = "categories.xml";
 
-        List<Article> articleList = new LinkedList<Article>();     //Speichert die Blogartikel
-        List<String> categoryList = new ArrayList<String>();    //Speichert die möglichen Kategorien
+        List<Article> articleList = new LinkedList<Article>();      //Speichert die Blogartikel
+        List<String> categoryList = new ArrayList<String>();        //Speichert die möglichen Kategorien
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("~~Deine BlogApp~~");
 
         // Vorhandene Blogartikel aus Datei importieren
         try {
@@ -28,6 +30,7 @@ public class Main {
             categoryList = importList(FILE_NAME_CATEGORIES);
         } catch (FileNotFoundException e) {                         //Datei für Kategorien neu anlegen
             categoryList.add("Familie");
+            categoryList.add("Gesundheit");
             categoryList.add("Klatsch");
             categoryList.add("Politik");
             categoryList.add("Reisen");
@@ -37,12 +40,11 @@ public class Main {
             categoryList.add("Wissenschaft");
             categoryList.add("Sonstiges");
             exportList(FILE_NAME_CATEGORIES, categoryList);
-            System.out.println("INFO:\nListe mit Kategorien neu angelegt. Standard-Einträge hinzugefügt.\n");
+            System.out.println("INFO:\nListe mit Kategorien neu angelegt. Standard-Einträge hinzugefügt.");
         }
 
-        Scanner scanner = new Scanner(System.in);
-
         while (true) {
+            // Hauptmenü
             System.out.println(
                     "\nWas möchtest du tun? Gib eine Nummer ein:\n" +
                     "1: Blogeinträge anzeigen\n" +
@@ -54,6 +56,7 @@ public class Main {
 
             switch (scanner.nextLine()) {
                 case "1":
+                    System.out.println("\n-Aktuelle Blogeinträge-\n");
                     for (int i = 1; i <= articleList.size(); i++) {
                         System.out.println("Nr.: " + i + "\n" + articleList.get(i -1));
                     }
@@ -68,9 +71,9 @@ public class Main {
                 case "4":
                     System.out.println("Welcher Blogeintrag soll gelöscht werden? Nr. eingeben:");
                     try {
-                        int selection = scanner.nextInt() -1;
-                        System.out.println("\nBlogeintrag \"" + articleList.get(selection).getTitle() + "\" wurde gelöscht.\n");
-                        articleList.remove(selection);
+                        int userInput = scanner.nextInt() -1;
+                        System.out.println("\nBlogeintrag \"" + articleList.get(userInput).getTitle() + "\" wurde gelöscht.\n");
+                        articleList.remove(userInput);
                     } catch (Exception e) {
                         System.out.println("\nFehler: Ein Blogeintrag mit dieser Nummer existiert nicht.\n");
                     } finally {
@@ -81,10 +84,11 @@ public class Main {
                     editCategories(categoryList);
                     break;
                 default:
+                    // Programm beenden
                     System.out.println("Änderungen speichern? (j/n)");
                     if(scanner.nextLine().equalsIgnoreCase("j")) {
                         exportList(FILE_NAME_ARTICLES, articleList);
-                        exportList(FILE_NAME_CATEGORIES, articleList);
+                        exportList(FILE_NAME_CATEGORIES, categoryList);
                     }
                     return;
             }
@@ -118,9 +122,9 @@ public class Main {
                         System.out.println(i + ": " + list.get(i -1));
                     System.out.println("0: Abbrechen");
                     try {
-                        int selection = scanner.nextInt();
-                        if(selection != 0) {
-                            list.remove(selection -1);
+                        int userInput = scanner.nextInt();
+                        if(userInput != 0) {
+                            list.remove(userInput -1);
                             System.out.println("\nKategorie wurde entfernet.");
                         } else
                             System.out.println("\nKeine Änderungen.");
@@ -141,7 +145,6 @@ public class Main {
                     return;
             }
         }
-
     }
 
     private static <T> void exportList (String file, List<T> list) {
@@ -165,5 +168,4 @@ public class Main {
         }
         return list;
     }
-
 }

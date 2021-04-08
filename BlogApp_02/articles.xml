@@ -4,88 +4,107 @@
   <void method="add">
    <object class="Article">
     <void property="author">
-     <string>Max</string>
+     <string>Erni</string>
     </void>
     <void property="category">
-     <string>Sonstiges</string>
+     <string>Technik</string>
     </void>
     <void property="content">
-     <string>jsajg kfj kfivkh ivihv
-kdabfk akdbgk akbka
-kdbkdja lafbkeab.</string>
+     <string>Bei AMD-Prozessoren ist die aktuelle Liefersituation
+noch erträglich, bei Grafikkarten ist sie hingegen
+katastrophal. Eine nennenswerte Verbesserung wird es
+aber angeblich erst gegen Jahresende geben. Bis dahin
+soll AMD monatlich 80.000 7-nm-Wafer von TSMC bekommen.
+Momentan sind es nur 60.000.</string>
     </void>
     <void property="date">
-     <string>2021-04-05 17:44:33</string>
-    </void>
-    <void property="title">
-     <string>Leute Heute</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="Article">
-    <void property="author">
-     <string>Bert</string>
-    </void>
-    <void property="category">
-     <string>Lifestyle</string>
-    </void>
-    <void property="content">
-     <string>nadgljbae osapü
-asbka adgkbx üsdo
-cvmdsk apois epej.</string>
-    </void>
-    <void property="date">
-     <string>2021-04-05 17:44:33</string>
+     <string>2021-04-08 15:09:57</string>
     </void>
     <void property="published">
      <boolean>true</boolean>
     </void>
     <void property="title">
-     <string>Eine Schrift</string>
+     <string>Aufrüsten bleibt weiter schwierig</string>
     </void>
    </object>
   </void>
   <void method="add">
    <object class="Article">
     <void property="author">
-     <string>Heidi</string>
+     <string>Liese Lotte</string>
     </void>
     <void property="category">
-     <string>Sport</string>
+     <string>Gesundheit</string>
     </void>
     <void property="content">
-     <string>dkgbaek xpaoj qpo
-sokasa dkdva ldiaefa
-yxlmq dyvpaekn aeofn.</string>
+     <string>Kombiniert man bestimmte Pflanzenstoffe, können diese
+bei Kniearthrose ähnlich gut helfen wie herkömmliche
+entzündungshemmende Medikamente. Während die Arzneimittel
+aber oft Nebenwirkungen haben, ist das bei der Pflanzenstoff-
+Kombination so gut wie nie der Fall.</string>
     </void>
     <void property="date">
-     <string>2021-04-05 17:44:33</string>
-    </void>
-    <void property="title">
-     <string>Nochmal</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="Article">
-    <void property="author">
-     <string>Dante</string>
-    </void>
-    <void property="category">
-     <string>Reisen</string>
-    </void>
-    <void property="content">
-     <string>kadjbgka ldjnalg lanflaebfg alfnlaebf algnlaebg</string>
-    </void>
-    <void property="date">
-     <string>2021-04-05 17:45:03</string>
+     <string>2021-04-08 15:11:30</string>
     </void>
     <void property="published">
      <boolean>true</boolean>
     </void>
     <void property="title">
-     <string>Heile Welt</string>
+     <string>Natur trumpft auf</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Article">
+    <void property="author">
+     <string>Giesbert</string>
+    </void>
+    <void property="category">
+     <string>Wirtschaft</string>
+    </void>
+    <void property="content">
+     <string>BMW verkauft im ersten Quartal so viele Autos wie nie.
+Im Vergleich zum Vorjahr ist der Autoabsatz des Münchner
+Konzerns um mehr als 33 Prozent gestiegen. Während das
+Geschäft in Asien boomt, läuft es im Heimatmarkt nur
+schleppend wieder an.</string>
+    </void>
+    <void property="date">
+     <string>2021-04-08 15:12:52</string>
+    </void>
+    <void property="published">
+     <boolean>true</boolean>
+    </void>
+    <void property="title">
+     <string>Was ist dein nächstes Auto?</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Article">
+    <void property="author">
+     <string>Olga</string>
+    </void>
+    <void property="category">
+     <string>Klatsch</string>
+    </void>
+    <void property="content">
+     <string>Elena Miras ist nervös. In wenigen Minuten steht ihr ein
+Eingriff bevor. Weil sie möglicherweise krebserregend sind,
+müssen ihre Brustimplantate entfernt werden. Schon in
+OP-Kittel zeigt sich die 28-Jährige kurz vor der Operation.
+Sie hat uns ein exklusives Video aus dem Krankenhaus
+geschickt, in dem sie verrät, wie es ihr wenige Minuten
+vor der OP geht.</string>
+    </void>
+    <void property="date">
+     <string>2021-04-08 15:13:46</string>
+    </void>
+    <void property="published">
+     <boolean>true</boolean>
+    </void>
+    <void property="title">
+     <string>Das muss nicht sein</string>
     </void>
    </object>
   </void>

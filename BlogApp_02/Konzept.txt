@@ -12,6 +12,7 @@ Artikel (class)
 	Methoden: Konstruktoren
 		  Getter + Setter
 		  print
+		  Neuer Artikel
 
 LinkedList<Artikel>
 Kategorien(String)
@@ -26,4 +27,5 @@ switch(input)
 		- hinzufügen
 		- entfernen
 
+Filtern nach Autor/Kategorie
 Export wird immer komplett neu geschrieben

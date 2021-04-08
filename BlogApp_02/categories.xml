@@ -5,6 +5,9 @@
    <string>Familie</string>
   </void>
   <void method="add">
+   <string>Gesundheit</string>
+  </void>
+  <void method="add">
    <string>Klatsch</string>
   </void>
   <void method="add">
