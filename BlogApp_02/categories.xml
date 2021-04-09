@@ -28,8 +28,5 @@
   <void method="add">
    <string>Wissenschaft</string>
   </void>
-  <void method="add">
-   <string>Sonstiges</string>
-  </void>
  </object>
 </java>

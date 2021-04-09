@@ -18,15 +18,6 @@ public class Article {
 
     public Article() {}
 
-    public Article(String author, String category, String title, String content, boolean published) {
-        this.author = author;
-        this.date = Date.valueOf(LocalDate.now()) + " " + Time.valueOf(LocalTime.now());
-        this.category = category;
-        this.title = title;
-        this.content = content;
-        this.published = published;
-    }
-
     public String getAuthor() {
         return author;
     }
@@ -84,54 +75,64 @@ public class Article {
                 "\n--------------------");
     }
 
-    public static Article newArticle(List<String> categories) {
+    public static Article newArticle(List<String> categoryList) {
         Scanner scanner = new Scanner (System.in);
         Article article = new Article();
 
         System.out.print("-NEUER BLOGEINTRAG-\n");
+
         System.out.print("Wer ist der Autor? ");
         article.setAuthor(scanner.nextLine());
+        if(article.getAuthor().isEmpty())
+            article.setAuthor("Unbekannt");
+
         System.out.print("Wie lautet der Titel? ");
         article.setTitle(scanner.nextLine());
+        if(article.getTitle().isEmpty())
+            article.setTitle("Kein Titel");
 
-        System.out.print("\nWillst du den Inhalt...\n" +
-                "1: selbst schreiben?\n" +
-                "2: aus einer Datei (*.txt) importieren?\n");
-        switch (scanner.nextLine()) {
-            case "1":
-                System.out.println("Leg los:");
-                article.setContent(scanner.nextLine());
-                break;
-            case "2":
-                String temp = "";
-                System.out.println("Gib den Dateipfad ein (z.B.: C\\User\\Documents\\Test.txt):");
-                try {
-                    Scanner readFile = new Scanner(new File(scanner.nextLine()));
-                    while (readFile.hasNextLine())
-                        temp += (readFile.nextLine()) + (readFile.hasNextLine() ? '\n':"");
-                    article.setContent(temp);
-                } catch (FileNotFoundException e) {
-                    System.out.println("Fehler: Keine gültige Datei gefunden.");
-                }
-                break;
-            default:
-                article.setContent("Hier könnte deine Werbung stehen.");
+        while(article.getContent() == null) {
+            System.out.print("\nWillst du den Inhalt...\n" +
+                    "1: selbst schreiben?\n" +
+                    "2: aus einer Datei (*.txt) importieren?\n");
+
+            switch (scanner.nextLine()) {
+                case "1":   // Inhalt per Hand eintragen
+                    System.out.println("Leg los:");
+                    article.setContent(scanner.nextLine());
+                    if (article.getContent().isEmpty())
+                        article.setContent("Hier könnte ihre Werbung stehen.");
+                    break;
+                case "2":   // Inhalt aus einer .txt Datei lesen
+                    String temp = "";
+                    System.out.println("Gib den Dateipfad ein (z.B.: C\\User\\Documents\\Test.txt):");
+                    try {
+                        Scanner readFile = new Scanner(new File(scanner.nextLine()));
+                        while (readFile.hasNextLine())
+                            temp += (readFile.nextLine()) + (readFile.hasNextLine() ? '\n' : "");
+                        article.setContent(temp);
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Fehler: Keine gültige Datei gefunden.");
+                    }
+                    break;
+                default:
+                    System.out.println("Ungültige Eingabe.");
+            }
         }
 
         System.out.println("\nWähle eine Kategorie:");
         while (true) {
-            for (int i = 1; i <= categories.size(); i++)    // Kategorien auflisten
-                System.out.println(i + ": " + categories.get(i -1));
-
+            for (int i = 1; i <= categoryList.size(); i++)    // Kategorien auflisten
+                System.out.println(i + ": " + categoryList.get(i -1));
+            System.out.println((categoryList.size() + 1) + ": Sonstiges");
             try {
-                article.setCategory(categories.get(scanner.nextInt() -1));
+                article.setCategory(categoryList.get(scanner.nextInt() -1));
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Bitte eine gültige Zahl eingeben.");
-                scanner.nextLine();
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Bitte einen gültigen Wert eingeben.");
-                scanner.nextLine();
+                article.setCategory("Sonstiges");
+                break;
             } finally {
                 scanner.nextLine();
             }
@@ -140,30 +141,13 @@ public class Article {
         System.out.println("\nBeitrag veröffentlichen? (j/n)");
         if (scanner.nextLine().equalsIgnoreCase("j")) {
             article.setPublished(true);
+            article.setDate(Date.valueOf(LocalDate.now()) + " " + Time.valueOf(LocalTime.now()));
             System.out.println("\nDein Beitrag wurde veröffentlicht.");
         } else {
             article.setPublished(false);
             System.out.println("\nDein Beitrag wurde als Entwurf gespeichert.");
         }
 
-        article.setDate(Date.valueOf(LocalDate.now()) + " " + Time.valueOf(LocalTime.now()));
-
         return article;
-    }
-
-    public static void searchArticle (List<Article> list) {
-        Scanner scanner = new Scanner(System.in);
-        String search = scanner.nextLine();
-        boolean foundArticle = false;
-        for (Article article : list) {
-            if (article.getTitle().toLowerCase().contains(search.toLowerCase())) {
-                if (!foundArticle)
-                    System.out.println("\nSuchergebnisse:\n");
-                System.out.println(article.toString());
-                foundArticle = true;
-            }
-        }
-        if(!foundArticle)
-            System.out.println("\nEs gab keinen Treffer für deine Suche.\n");
     }
 }
