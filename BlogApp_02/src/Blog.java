@@ -136,6 +136,7 @@ public class Blog {
                                         " " + Time.valueOf(LocalTime.now()));
                                 System.out.println("Entwurf \"" + this.articleList.get(userInput).getTitle() +
                                         "\" wurde veröffentlicht.");
+                                Collections.sort(articleList);      // Neu veröffentlicheten Artikel ans Ende stellen.
                             } else
                                 System.out.println("Artikel \"" + this.articleList.get(userInput).getTitle() +
                                         "\" wurde bereits veröffentlicht.");
@@ -205,10 +206,8 @@ public class Blog {
                             System.out.println("\nKategorie wurde entfernet.");
                         } else
                             System.out.println("\nKeine Änderungen.");
-                    } catch (InputMismatchException e) {
-                        System.out.println("Fehler: Ungültiger Wert.");
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Fehler: Hier gibt es keine Kategorie.");
+                    } catch (InputMismatchException | IndexOutOfBoundsException e) {
+                        System.out.println("Ungültige Eingabe.");
                     } finally {
                         scanner.nextLine();
                     }

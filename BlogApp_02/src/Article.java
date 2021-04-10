@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Article {
+public class Article implements Comparable<Article> {
     private String author;
     private String date;
     private String category;
@@ -17,6 +17,11 @@ public class Article {
     private boolean published;
 
     public Article() {}
+
+    @Override
+    public int compareTo(Article article) {
+        return date.compareTo(article.date);
+    }
 
     public String getAuthor() {
         return author;
