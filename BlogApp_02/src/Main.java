@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -37,11 +38,14 @@ public class Main {
                     System.out.println("Welcher Blogeintrag soll gelöscht werden? Nr. eingeben:");
                     try {
                         int userInput = scanner.nextInt() -1;
-                        System.out.println("\nBlogeintrag \"" + blog.getArticleList().get(userInput).getTitle() +
-                                "\" wurde gelöscht.");
-                        blog.getArticleList().remove(userInput);
-                    } catch (Exception e) {
-                        System.out.println("\nFehler: Ein Blogeintrag mit dieser Nummer existiert nicht.");
+                        if(blog.getArticleList().get(userInput).isPublished()) {
+                            blog.getArticleList().remove(userInput);
+                            System.out.println("\nBlogeintrag \"" + blog.getArticleList().get(userInput).getTitle() +
+                                    "\" wurde gelöscht.");
+                        } else
+                            System.out.println("\nUngültige Eingabe.");
+                    } catch (IndexOutOfBoundsException | InputMismatchException e) {
+                        System.out.println("\nUngültige Eingabe.");
                     } finally {
                         scanner.nextLine();
                     }
@@ -56,8 +60,10 @@ public class Main {
                     // Programm beenden
                     System.out.println("Änderungen speichern? (j/n)");
                     if(scanner.nextLine().equalsIgnoreCase("j")) {
-                        blog.saveFiles();
-                    }
+                        blog.exportList(blog.getFilepathArticles(), blog.getArticleList());
+                        System.out.println("Gespeichert");
+                    } else
+                        System.out.println("Verworfen");
                     return;
                 default:
                     System.out.println("Ungültige Eingabe.");

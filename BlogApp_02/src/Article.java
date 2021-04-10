@@ -125,14 +125,16 @@ public class Article {
             for (int i = 1; i <= categoryList.size(); i++)    // Kategorien auflisten
                 System.out.println(i + ": " + categoryList.get(i -1));
             System.out.println((categoryList.size() + 1) + ": Sonstiges");
+
             try {
-                article.setCategory(categoryList.get(scanner.nextInt() -1));
+                int userInput = scanner.nextInt() -1;
+                if(userInput == categoryList.size())
+                    article.setCategory("Sonstiges");
+                else
+                    article.setCategory(categoryList.get(userInput));
                 break;
-            } catch (InputMismatchException e) {
-                System.out.println("Bitte eine gültige Zahl eingeben.");
-            } catch (IndexOutOfBoundsException e) {
-                article.setCategory("Sonstiges");
-                break;
+            } catch (InputMismatchException | IndexOutOfBoundsException e) {
+                System.out.println("\nUngültige Eingabe. Nochmal:\n");
             } finally {
                 scanner.nextLine();
             }
@@ -141,12 +143,13 @@ public class Article {
         System.out.println("\nBeitrag veröffentlichen? (j/n)");
         if (scanner.nextLine().equalsIgnoreCase("j")) {
             article.setPublished(true);
-            article.setDate(Date.valueOf(LocalDate.now()) + " " + Time.valueOf(LocalTime.now()));
             System.out.println("\nDein Beitrag wurde veröffentlicht.");
         } else {
             article.setPublished(false);
             System.out.println("\nDein Beitrag wurde als Entwurf gespeichert.");
         }
+
+        article.setDate(Date.valueOf(LocalDate.now()) + " " + Time.valueOf(LocalTime.now()));
 
         return article;
     }
