@@ -136,7 +136,10 @@ public class Blog {
                                         " " + Time.valueOf(LocalTime.now()));
                                 System.out.println("Entwurf \"" + this.articleList.get(userInput).getTitle() +
                                         "\" wurde veröffentlicht.");
-                                Collections.sort(articleList);      // Neu veröffentlicheten Artikel ans Ende stellen.
+                                // Neu veröffentlicheten Artikel ans Ende stellen.
+                                // Collections.sort(articleList);
+                                this.articleList.add(this.articleList.get(userInput));
+                                this.articleList.remove(userInput);
                             } else
                                 System.out.println("Artikel \"" + this.articleList.get(userInput).getTitle() +
                                         "\" wurde bereits veröffentlicht.");
